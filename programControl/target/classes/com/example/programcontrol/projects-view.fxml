@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="249.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.programcontrol.ProjectsController">
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="201.0" prefWidth="459.0" BorderPane.alignment="CENTER">
+         <items>
+            <HBox>
+               <children>
+                  <ListView fx:id="projectsList" />
+                  <ListView fx:id="versions" />
+                  <ListView fx:id="filesList" />
+               </children>
+            </HBox>
+            <VBox prefHeight="199.0" prefWidth="171.0">
+               <children>
+                  <Label text="Версия" />
+                  <TextField fx:id="version" />
+                  <Label text="Изменения" />
+                  <TextField fx:id="fixes" />
+                  <Button mnemonicParsing="false" onAction="#loadVersion" text="Сохранить новую версию" />
+                  <Button mnemonicParsing="false" onAction="#unloadProject" text="Выгрузить выбранную версию" />
+                  <Separator prefHeight="12.0" prefWidth="224.0" />
+                  <ToolBar>
+                     <items>
+                        <Button mnemonicParsing="false" onAction="#removeFile" text="Удалить файл" />
+                        <Button mnemonicParsing="false" onAction="#copy" text="Копировать" />
+                        <Button mnemonicParsing="false" onAction="#addFile" text="Добавить файл" />
+                        <VBox>
+                           <children>
+                              <TextField fx:id="newName" />
+                              <Button mnemonicParsing="false" onAction="#renameFile" text="Переименовать файл" />
+                           </children>
+                        </VBox>
+                     </items>
+                  </ToolBar>
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Проекты">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#loadProject" text="Добавить проект" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

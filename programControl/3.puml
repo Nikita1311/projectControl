@@ -1,0 +1,126 @@
+@startuml
+class com.example.programcontrol.DatabaseAdapter {
++ {static} String DB_URL
++ {static} String DB_Driver
++ {static} String TableProject
++ {static} String TableUser
++ {static} String TableFile
++ {static} String TableVersion
++ {static} void getDBConnection()
+- {static} void deleteTable(String)
+- {static} void createTableProject()
+- {static} void createTableVersion()
+- {static} void createTableFile()
+- {static} void createTableUser()
++ {static} int getUser(String,String)
++ {static} Project getProject(int)
++ {static} Version getVersion(int)
++ {static} User getUser(int)
++ {static} void getProjects(ObservableList<Project>,User)
++ {static} void getVersions(ObservableList<Version>,Project)
++ {static} void getFiles(ObservableList<File>,Version)
++ {static} int addUser(User)
++ {static} int addProject(Project)
++ {static} int addVersion(Version)
++ {static} File addFile(File)
++ {static} boolean renameFile(File)
++ {static} boolean deleteFile(int)
+}
+class com.example.programcontrol.File {
+- int id
+- String path
+- String format
+- byte[] file
+- int versionID
++ int getId()
++ void setId(int)
++ File clone()
++ byte[] getFile()
++ void setPath(String)
++ String getFormat()
++ String getPath()
++ int getVersionID()
++ String toString()
+}
+class com.example.programcontrol.HelloApplication {
++ void start(Stage)
++ {static} void main(String[])
+}
+class com.example.programcontrol.User {
+~ String name
+~ String password
+~ int id
+~ List<Project> projects
+}
+class com.example.programcontrol.User$UserBuilder {
+~ String name
+~ String password
+~ List<Project> projects
+~ int id
++ UserBuilder setId(int)
++ UserBuilder setProjects(ObservableList<Project>)
++ User build()
+}
+class com.example.programcontrol.HelloController {
++ TextField nameField
++ TextField passField
++ void userEnter(int)
++ void initialize(URL,ResourceBundle)
++ void login()
++ int userCheck()
++ void register()
+}
+class com.example.programcontrol.Project {
+~ List<Version> versions
+~ String title
+~ int id
+~ int owner
++ void setTitle(String)
++ List<Version> getVersions()
++ void addVersion(String)
++ void setVersions(List<Version>)
++ String toString()
+}
+class com.example.programcontrol.Version {
+~ List<File> files
+~ String version
+~ String fixes
+~ int id
+~ int project
+~ LocalDateTime dateTime
++ String getVersion()
++ void setVersion(String)
++ List<File> getFiles()
++ LocalDateTime getDateTime()
++ void setDateTime(LocalDateTime)
++ void setFiles(List<File>)
++ String toString()
+}
+class com.example.programcontrol.ProjectsController {
++ ListView<Project> projectsList
++ ListView<Version> versions
++ TextField version
++ TextField fixes
++ ListView<com.example.programcontrol.File> filesList
++ TextField newName
+~ User user
++ ObservableList<Version> versionsList
+~ ObservableList<Project> projects
+~ ObservableList<com.example.programcontrol.File> files
++ void init(int)
+- void loadVersion()
+- void addFile()
+- void removeFile()
+- void renameFile()
+- void copy()
+- void loadProject()
+- void filesInDirectory(File,Version,String)
+- void unloadProject()
+~ {static} void writeByte(byte[],File)
+}
+
+
+javafx.application.Application <|-- com.example.programcontrol.HelloApplication
+com.example.programcontrol.User +.. com.example.programcontrol.User$UserBuilder
+javafx.fxml.Initializable <|.. com.example.programcontrol.HelloController
+@enduml
